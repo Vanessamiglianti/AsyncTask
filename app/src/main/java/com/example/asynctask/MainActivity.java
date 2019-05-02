@@ -1,6 +1,7 @@
 package com.example.asynctask;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
+import com.vanessa.interfaces.DonwloadComplete;
+
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements DonwloadComplete{
 
     final String TAG = "MainActivity";
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     BackTask myBackTask = null;
     Context context= null;
     String directory= "";
+    DonwloadComplete dc = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
         bt= findViewById(R.id.btA);
         im=findViewById(R.id.image);
 
+        dc = this;
+
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 directory= createDirectory(); //creo la directory
 
-                myBackTask= new BackTask(context, directory);
+                myBackTask= new BackTask(context, directory, dc); //ho passato l'stanza della mainactivity dentro il backtask
 
                 //devo recuperare url
                 String insertURK = etT.getText().toString();
@@ -63,5 +69,14 @@ public class MainActivity extends AppCompatActivity {
         }
         return myDir;
     }
+
+    @Override
+    public void onDownloadCompleted (Bitmap bitmap) {
+
+        im.setImageBitmap(bitmap);
+
+    }
+
+
 
 }

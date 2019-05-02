@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.vanessa.interfaces.DonwloadComplete;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,7 +32,9 @@ public class BackTask extends AsyncTask<String, Integer, String> {
     ProgressDialog pd = null;
     Context context = null; //chi rappresenta l'interfaccia grafica
 
-    public BackTask(Context context, String directory) {  //costruttore della nostra classe
+    DonwloadComplete dc= null; //per richiamare i metodi delle interfacce, oggetto di tipo interfaccia
+
+    public BackTask(Context context, String directory, DonwloadComplete dc) {  //costruttore della nostra classe
 
         this.context= context;
         storeDir= directory;
@@ -38,6 +42,7 @@ public class BackTask extends AsyncTask<String, Integer, String> {
         pd= new ProgressDialog(this.context);
         pd.setTitle("Downloading file...");
         pd.setMax(100);
+        this.dc= dc;
     }
 
     //creo la onpreexecute in funzione ai 3 tipi di dato
@@ -109,7 +114,8 @@ public class BackTask extends AsyncTask<String, Integer, String> {
 
         //visualizzo l'immagine
         Bitmap myImage= BitmapFactory.decodeFile(s); //come la visualizzo nella main activity?
-        MainActivity.im.setImageBitmap(myImage);
+        this.dc.onDownloadCompleted(myImage);
+        //MainActivity.im.setImageBitmap(myImage);
 
     }
 }

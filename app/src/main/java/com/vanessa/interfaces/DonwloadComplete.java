@@ -6,4 +6,6 @@ public interface DonwloadComplete {
 
     public void onDownloadCompleted (Bitmap bipmap);
 
+    //java, nuovo package, main ,
+
 }

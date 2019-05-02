@@ -50,7 +50,7 @@ public class BackTask extends AsyncTask<String, Integer, String> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-        pd.show(); //visualizzo la barra del progresso se lo facessi nel do in back l'app andrebbe in crash
+       // pd.show(); //visualizzo la barra del progresso se lo facessi nel do in back l'app andrebbe in crash
 
     }
 

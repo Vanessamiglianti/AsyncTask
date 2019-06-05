@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity  implements DonwloadComplete
         setContentView(R.layout.activity_main);
         context= getApplicationContext();
 
-        //creo la nnuova class in superclass AsyncTask
+        //creo la nuova class in superclass AsyncTask
         etT= findViewById(R.id.etA);
         bt= findViewById(R.id.btA);
         im=findViewById(R.id.image);
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity  implements DonwloadComplete
             public void onClick(View v) {
                 directory= createDirectory(); //creo la directory
 
-                myBackTask= new BackTask(context, directory, dc); //ho passato l'stanza della mainactivity dentro il backtask
+                myBackTask= new BackTask(context, directory, dc); //ho passato l'istanza della mainactivity dentro il backtask
 
                 //devo recuperare url
                 String insertURK = etT.getText().toString();
